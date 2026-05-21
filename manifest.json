@@ -1,0 +1,9 @@
+{
+  "name": "Python Practicals",
+  "short_name": "Python",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Python Programming Practicals"
+}

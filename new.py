@@ -1,20 +1,20 @@
-class student:
-    def __init__(self,name,age,marks):
-        self.name = name
-        self.age = age
-        self.marks = marks
+import pandas as pd
 
-    def display_details(self):
-        print("Name : ",self.name)
-        print("Age : ",self.age)
-        print("Marks : ",self.marks)
+data = {
+    "name" : ["Tilak", "Yogesh", "Yash", "Shikha"],
+    "roll_no" : [101, 102, 103 ,104],
+    "marks" : [98, 40, 50, 60]
+}
 
-students_list = {
-            student("Tilak", 27, 94),
-            student("Yash", 18, 92),
-            student("Shikha", 23, 99)
-        }
+df = pd.DataFrame(data)
+print(df)
 
-for s in students_list:
-            print("----------------------")
-            s.display_details()
+print("------------------------")
+filtered_students = df[df["marks"]>75]
+print(filtered_students)
+
+print("------------------------")
+sorted_students = df.sort_values(by="marks", ascending=False)
+print(sorted_students)
+
+
