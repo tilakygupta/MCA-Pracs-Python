@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python Practicals</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(() => console.log('Service Worker registered'))
+          .catch(err => console.log('SW error:', err));
+      });
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --link: #3a6da8;
+      --code-bg: #f4f4f4;
+      --border: #cccccc;
+      --heading: #2c2c2c;
+      --toc-bg: #f9f9f9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--heading);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.3rem;
+      color: var(--heading);
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-top: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: var(--heading);
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      color: var(--heading);
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    #table-of-contents {
+      background: var(--toc-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2.5rem;
+      display: inline-block;
+      min-width: 280px;
+    }
+
+    #table-of-contents h2 {
+      font-size: 1.1rem;
+      border-bottom: none;
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+    }
+
+    #table-of-contents ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #table-of-contents > ul > li {
+      margin-bottom: 0.3rem;
+    }
+
+    #table-of-contents ul ul {
+      padding-left: 1.4rem;
+      margin-top: 0.2rem;
+    }
+
+    #table-of-contents li { font-size: 0.93rem; }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .section { margin-bottom: 1.5rem; }
+
+    p {
+      margin-bottom: 0.6rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: #666;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Python Practicals</h1>
+
+<!-- TABLE OF CONTENTS -->
+<div id="table-of-contents">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><a href="#p1">1. Practical 1 - Student Details &amp; Arithmetic Operations</a></li>
+    <li><a href="#p2">2. Practical 2 - Prime Number Check</a></li>
+    <li><a href="#p3">3. Practical 3 - Factorial &amp; Fibonacci</a>
+      <ul>
+        <li><a href="#p3-recursive">3.1. Recursive</a></li>
+        <li><a href="#p3-iterative">3.2. Iterative</a></li>
+      </ul>
+    </li>
+    <li><a href="#p4">4. Practical 4 - String &amp; List Operations</a>
+      <ul>
+        <li><a href="#p4-string">4.1. String Operations</a></li>
+        <li><a href="#p4-list">4.2. List Operations</a></li>
+      </ul>
+    </li>
+    <li><a href="#p5">5. Practical 5 - Employee Dictionary, Tuples &amp; Sets</a>
+      <ul>
+        <li><a href="#p5-dict">5.1. Employee Dictionary</a></li>
+        <li><a href="#p5-tuple">5.2. Tuple Packing &amp; Unpacking</a></li>
+        <li><a href="#p5-set">5.3. Set Operations</a></li>
+      </ul>
+    </li>
+    <li><a href="#p6">6. Practical 6 - OOP: Student &amp; GraduateStudent</a></li>
+    <li><a href="#p7">7. Practical 7 - File Handling</a></li>
+    <li><a href="#p8">8. Practical 8 - Exception Handling</a></li>
+    <li><a href="#p9">9. Practical 9 - Pandas DataFrame</a></li>
+    <li><a href="#p10">10. Practical 10 - Matplotlib Charts</a>
+      <ul>
+        <li><a href="#p10-line">10.1. Line Chart</a></li>
+        <li><a href="#p10-bar">10.2. Bar Chart</a></li>
+        <li><a href="#p10-hist">10.3. Histogram</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<!-- PRACTICAL 1 -->
+<div class="section">
+  <h2 id="p1">1. Practical 1 - Student Details &amp; Arithmetic Operations</h2>
+  <p>Write a Python program to accept student details (name, age, percentage) and display them using formatted output. Perform basic arithmetic operations.</p>
+  <pre><code>a = float(input("Enter your first number: "))
+b = float(input("Enter your second number: "))
+
+print("\n ----- Arithmetic Operations ----")
+print(f"Sum: {a+b}")
+print(f"Difference: {a-b}")
+print(f"Product: {a*b}")
+
+if b != 0:
+    print(f"Division: {a/b:.3f}")
+else:
+    print(f"Division: Cannot be done by Zero")</code></pre>
+</div>
+
+<!-- PRACTICAL 2 -->
+<div class="section">
+  <h2 id="p2">2. Practical 2 - Prime Number Check</h2>
+  <p>Write a program to check whether a number is prime. Also, display all prime numbers between 1 and 100 using a loop.</p>
+  <pre><code>num = int(input("Enter a number: "))
+
+if num > 1:
+    is_prime = True
+
+    for i in range(2, num):
+        if num % i == 0:
+            is_prime = False
+            break
+
+    if is_prime:
+        print(f"{num} is a prime number")
+    else:
+        print(f"{num} is not a prime number")
+else:
+    print(f"{num} is not a prime number")
+
+
+print("\n---- Prime numbers between 1 and 100 ----")
+for n in range(2, 101):
+    prime = True
+
+    for i in range(2, n):
+        if n % i == 0:
+            prime = False
+
+    if prime:
+        print(n, end=" ")</code></pre>
+</div>
+
+<!-- PRACTICAL 3 -->
+<div class="section">
+  <h2 id="p3">3. Practical 3 - Factorial &amp; Fibonacci</h2>
+  <p>Implement recursive and iterative functions to calculate factorial and Fibonacci numbers.</p>
+
+  <h3 id="p3-recursive">3.1. Recursive</h3>
+  <pre><code>def fact_recursive(n):
+    if n == 1 or n == 0:
+        return 1
+    return n * fact_recursive(n-1)
+
+def fibo_recursive(n):
+    if n <= 1:
+        return n
+    return fibo_recursive(n-1) + fibo_recursive(n-2)
+
+number = int(input("Enter a number: "))
+print("Recursive factorial: ", fact_recursive(number))
+
+print("\nFibonacci Series using Recursion:")
+for i in range(number):
+    print(fibo_recursive(i), end=" ")</code></pre>
+
+  <h3 id="p3-iterative">3.2. Iterative</h3>
+  <pre><code>def fact_iterative(n):
+    fact = 1
+    for i in range(1, n+1):
+        fact *= i
+    return fact
+
+def fibo_iterative(n):
+    a, b = 0, 1
+    for i in range(n):
+        print(a, end=" ")
+        a, b = b, a+b
+
+number = int(input("Enter a number: "))
+print("Iterative factorial: ", fact_iterative(number))
+
+print("\nFibonacci Series using Iteration:")
+fibo_iterative(number)</code></pre>
+</div>
+
+<!-- PRACTICAL 4 -->
+<div class="section">
+  <h2 id="p4">4. Practical 4 - String &amp; List Operations</h2>
+  <p>Create a program that accepts a string and performs operations: reverse, count vowels, find palindrome. Also accepts a list of integers and sorts, finds max/min, removes duplicates.</p>
+
+  <h3 id="p4-string">4.1. String Operations</h3>
+  <pre><code>string = input("Enter a string: ").lower()
+
+reverse_string = string[::-1]
+
+vowels = "aeiouAEIOU"
+vowel_counter = 0
+for ch in string:
+    if ch in vowels:
+        vowel_counter += 1
+
+if string == reverse_string:
+    palindrome = True
+else:
+    palindrome = False
+
+print("\n--- String Operations ---")
+print("Original String :", string)
+print("Reversed String :", reverse_string)
+print("Vowel Count     :", vowel_counter)
+print("Palindrome      :", palindrome)</code></pre>
+
+  <h3 id="p4-list">4.2. List Operations</h3>
+  <pre><code>nums = list(map(int, input("\nEnter numbers with spaces: ").split()))
+
+sorted_nums = sorted(nums)
+max_num = max(nums)
+min_num = min(nums)
+unique_num = list(set(nums))
+
+print("\n--- List Operations ---")
+print("Original List           :", nums)
+print("Sorted List             :", sorted_nums)
+print("Maximum Element         :", max_num)
+print("Minimum Element         :", min_num)
+print("List Without Duplicates :", unique_num)</code></pre>
+</div>
+
+<!-- PRACTICAL 5 -->
+<div class="section">
+  <h2 id="p5">5. Practical 5 - Employee Dictionary, Tuples &amp; Sets</h2>
+  <p>Create a dictionary to store employee data. Perform add/update/remove operations, display employees with salary &gt; 50,000, and demonstrate tuple packing/unpacking and set operations.</p>
+
+  <h3 id="p5-dict">5.1. Employee Dictionary</h3>
+  <pre><code>employees = {
+    101: {"name": "Rahul", "salary": 45000},
+    102: {"name": "Anita", "salary": 60000},
+    103: {"name": "Vikas", "salary": 75000}
+}
+
+print("----- Employee Details -----")
+for emp_id, details in employees.items():
+    print(f"ID: {emp_id}")
+    print(f"Name: {details['name']}")
+    print(f"Salary: {details['salary']}")
+    print()
+
+# Add Employee
+employees[104] = {"name": "Sneha", "salary": 55000}
+print("Employee Added Successfully\n")
+
+# Update Employee
+employees[101]["salary"] = 50000
+print("Employee Salary Updated Successfully\n")
+
+# Remove Employee
+del employees[103]
+print("Employee Removed Successfully\n")
+
+print("----- Updated Employee Details -----")
+for emp_id, details in employees.items():
+    print(f"ID: {emp_id}")
+    print(f"Name: {details['name']}")
+    print(f"Salary: {details['salary']}")
+    print()
+
+print("----- Employees with Salary Greater Than 50000 -----")
+for emp_id, details in employees.items():
+    if details["salary"] > 50000:
+        print(f"{details['name']} --> {details['salary']}")</code></pre>
+
+  <h3 id="p5-tuple">5.2. Tuple Packing &amp; Unpacking</h3>
+  <pre><code>print("\n----- Tuple Packing and Unpacking -----")
+
+# Tuple Packing
+employee_tuple = ("Amit", 105, 70000)
+print("Packed Tuple:")
+print(employee_tuple)
+
+# Tuple Unpacking
+name, emp_id, salary = employee_tuple
+print("\nUnpacked Values:")
+print("Name   :", name)
+print("ID     :", emp_id)
+print("Salary :", salary)</code></pre>
+
+  <h3 id="p5-set">5.3. Set Operations</h3>
+  <pre><code>print("\n----- Set Operations -----")
+
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+print("Set 1 :", set1)
+print("Set 2 :", set2)
+
+print("\nUnion:")
+print(set1.union(set2))
+
+print("\nIntersection:")
+print(set1.intersection(set2))
+
+print("\nDifference (Set1 - Set2):")
+print(set1.difference(set2))
+
+print("\nSymmetric Difference:")
+print(set1.symmetric_difference(set2))</code></pre>
+</div>
+
+<!-- PRACTICAL 6 -->
+<div class="section">
+  <h2 id="p6">6. Practical 6 - OOP: Student &amp; GraduateStudent</h2>
+  <p>Create a class Student with attributes (name, roll number, marks). Include a constructor, method to display details, and an inherited class GraduateStudent that adds a project_title attribute.</p>
+  <pre><code>class student:
+    def __init__(self, name, roll_no, marks):
+        self.name = name
+        self.roll_no = roll_no
+        self.marks = marks
+
+    def display_details(self):
+        print("Name: ", self.name)
+        print("Roll No: ", self.roll_no)
+        print("Marks: ", self.marks)
+
+class GraduateStudent(student):
+    def __init__(self, name, roll_no, marks, project_name):
+        super().__init__(name, roll_no, marks)
+        self.project_name = project_name
+
+    def display_graduate_details(self):
+        self.display_details()
+        print("Project Title: ", self.project_name)
+
+
+student_list = {
+    student("Tilak", 27, 94),
+    student("Yash", 18, 92),
+    student("Shikha", 23, 99)
+}
+
+for s in student_list:
+    print("----------------------")
+    s.display_details()
+
+print("----------------------")
+grad_student = GraduateStudent("Tilak", 27, 94, "AI System")
+grad_student.display_graduate_details()</code></pre>
+</div>
+
+<!-- PRACTICAL 7 -->
+<div class="section">
+  <h2 id="p7">7. Practical 7 - File Handling</h2>
+  <p>Write a program to create a text file and write employee data, read the file and display data, and count the number of lines, words, and characters in the file.</p>
+  <pre><code>file = open("employee.txt", "w")
+
+file.write("101 Tilak Gupta 20000\n")
+file.write("102 Yash Gupta 30000\n")
+file.write("103 Shikha Gupta 40000\n")
+
+file.close()
+print("\nEmployees added successfully")
+
+file = open("employee.txt", "r")
+data = file.read()
+
+print("------Employee File Details------")
+print(data)
+file.close()
+
+file = open("employee.txt", "r")
+content = file.read()
+
+characters = len(content)
+words = len(content.split())
+lines = content.splitlines()
+
+print("----- File Statistics -----")
+print("Number of Lines      :", lines)
+print("Number of Words      :", words)
+print("Number of Characters :", characters)
+
+file.close()</code></pre>
+</div>
+
+<!-- PRACTICAL 8 -->
+<div class="section">
+  <h2 id="p8">8. Practical 8 - Exception Handling</h2>
+  <p>Implement a Python program that handles division by zero, invalid input using try/except/finally, and raises custom exceptions for age validation (Age &lt; 18 not allowed).</p>
+  <pre><code>class AgeValidationError(Exception):
+    pass
+
+try:
+    num1 = int(input("Enter first number: "))
+    num2 = int(input("Enter second number: "))
+
+    result = num1 / num2
+    print("\nDivision Result =", result)
+
+    age = int(input("\nEnter your age: "))
+
+    if age < 18:
+        raise AgeValidationError("Age below 18 is not allowed.")
+
+    print("Age is valid.")
+
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+
+except ValueError:
+    print("Error: Invalid input. Please enter numbers only.")
+
+except AgeValidationError as e:
+    print("Custom Exception:", e)
+
+finally:
+    print("\nProgram execution completed.")</code></pre>
+</div>
+
+<!-- PRACTICAL 9 -->
+<div class="section">
+  <h2 id="p9">9. Practical 9 - Pandas DataFrame</h2>
+  <p>Using Pandas: Create a DataFrame for students (Name, Roll No, Marks). Perform filtering (marks &gt; 75), sorting, and statistical analysis (mean, max, min). Export DataFrame to CSV.</p>
+  <pre><code>import pandas as pd
+
+data = {
+    "Name": ["Rahul", "Anita", "Vikas", "Sneha", "Amit"],
+    "Roll No": [101, 102, 103, 104, 105],
+    "Marks": [85, 72, 90, 67, 78]
+}
+
+df = pd.DataFrame(data)
+
+print("----- Student DataFrame -----")
+print(df)
+
+print("--------------------------------")
+filtered_students = df[df["Marks"] > 75]
+print(filtered_students)
+
+sorted_df = df.sort_values(by="Marks", ascending=False)
+
+print("\n----- Sorted DataFrame (Descending Marks) -----")
+print(sorted_df)
+
+mean_marks = df["Marks"].mean()
+max_marks = df["Marks"].max()
+min_marks = df["Marks"].min()
+
+print("\n----- Statistical Analysis -----")
+print("Average Marks :", mean_marks)
+print("Maximum Marks :", max_marks)
+print("Minimum Marks :", min_marks)
+
+df.to_csv("students.csv", index=False)
+print("\nDataFrame exported to students.csv successfully.")</code></pre>
+</div>
+
+<!-- PRACTICAL 10 -->
+<div class="section">
+  <h2 id="p10">10. Practical 10 - Matplotlib Charts</h2>
+  <p>Plot the following using Matplotlib: Line chart for student marks, Bar chart for subject-wise performance, and Histogram for age distribution.</p>
+
+  <h3 id="p10-line">10.1. Line Chart - Student Marks</h3>
+  <pre><code>import matplotlib.pyplot as plt
+
+students = ["Rahul", "Anita", "Vikas", "Sneha", "Amit"]
+marks = [85, 72, 90, 67, 78]
+
+plt.figure(figsize=(6, 4))
+plt.plot(students, marks, marker='o')
+plt.title("Students Marks")
+plt.xlabel("Students")
+plt.ylabel("Marks")
+plt.grid(True)
+plt.show()</code></pre>
+
+  <h3 id="p10-bar">10.2. Bar Chart - Subject-wise Performance</h3>
+  <pre><code>import matplotlib.pyplot as plt
+
+subjects = ["Math", "Science", "English", "Computer", "History"]
+scores = [88, 92, 76, 95, 80]
+
+plt.figure(figsize=(6, 4))
+plt.bar(subjects, scores)
+plt.title("Subject-wise Performance")
+plt.xlabel("Subjects")
+plt.ylabel("Scores")
+plt.show()</code></pre>
+
+  <h3 id="p10-hist">10.3. Histogram - Age Distribution</h3>
+  <pre><code>import matplotlib.pyplot as plt
+
+ages = [18, 19, 20, 18, 21, 22, 20, 19, 18, 21,
+        22, 23, 20, 19, 18, 21, 20, 22]
+
+plt.figure(figsize=(6, 4))
+plt.hist(ages, bins=5)
+plt.title("Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()</code></pre>
+</div>
+
+<footer>
+  Created: 2026-05-21 &nbsp;|&nbsp; Python Practicals
+</footer>
+
+</body>
+</html>
